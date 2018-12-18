@@ -77,7 +77,7 @@
       var buttonStr = "<button id='zoomTo"+feature.properties.name.replace(/ /g, '');
       buttonStr += "' class='form-control btn btn-primary attraction'>";
       buttonStr += feature.properties.name+"</button>";
-      if(feature.properties.name.length != 2){
+      if(feature.properties.name.length > 3){
         $("#side_panel").append(buttonStr);
       }
 
@@ -89,7 +89,7 @@
     }});
     geojsonLayer.addTo(mymap);
 
-    var edgeLayer = new L.GeoJSON.AJAX("data\/edges.geojson");
+    var edgeLayer = new L.GeoJSON.AJAX("myfileedges.geojson");
     edgeLayer.addTo(mymap);
     const options = {delay: 400, dashArray: [10,20], weight: 10, color: "#0000FF", pulseColor: "#FFFFFF"};
     const path = new L.Polyline.AntPath([[45.50500, -73.57791],   [45.50249, -73.57643]], options);
