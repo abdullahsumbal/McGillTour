@@ -1,4 +1,4 @@
-from geojson import Point, Feature, FeatureCollection, dump
+from geojson import Point, Feature, FeatureCollection, dump, LineString
 import json
 
 
@@ -20,4 +20,15 @@ for name, coordinates in data["Points"].items():
 feature_collection = FeatureCollection(features)
 
 with open('myfile.geojson', 'w') as f:
+   dump(feature_collection, f)
+
+
+features = []
+for name, adjList in data["Edges"].items():
+    for adj in adjList:
+        features.append(Feature(geometry=LineString(coordinates = [data["Points"][name], data["Points"][adj]])))
+
+feature_collection = FeatureCollection(features)
+
+with open('myfileedges.geojson', 'w') as f:
    dump(feature_collection, f)

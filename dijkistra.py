@@ -115,4 +115,4 @@ for name, adjNodes in data["Edges"].items():
 
 graph = Graph(graphList)
 
-print(list(graph.dijkstra("Trottier", "McConnell")))
+print(list(graph.dijkstra("Arts Building", "Mclennan Library")))
