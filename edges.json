@@ -1,0 +1,18 @@
+{
+
+  "Points" : {
+    "Trottier": [-73.579006, 45.507418],
+    "McConnell": [-73.57643, 45.50614],
+    "Arts Building": [-73.57764, 45.50523],
+    "Mclennan Library": [ -73.57589, 45.50326],
+    "Bronfman": [-73.57643, 45.50249],
+    "Mclntyre": [-73.58252, 45.50304],
+    "SSMU": [-73.57817, 45.50353]
+
+  },
+
+  "Edges" : {
+    "Trottier": ["McConnell","Arts Building"]
+  }
+
+}

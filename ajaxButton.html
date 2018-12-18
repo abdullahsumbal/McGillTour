@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PHP Test</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+  <body>
+<input type="date" id="Time" value="2018-01-01"><br>
+<select id="status">
+  <option value="ACTIVE">Active</option>
+  <option value="INACTIVE">Inactive</option>
+  </option>
+</select><br>
+<button id="submitButton">Submit</button>
+<button id="btnBuffer">Buffer</button>
+<hr><div id="resultTable"></div>
+
+<script>
+
+  $("#submitButton").click(function(){
+  $.ajax({
+      url:'ajaxResponse.php',
+      type:'POST',
+      data:{
+        Time: $("#Time").val(),
+        Status: $("status").val()
+      },
+      success: function(response){
+
+        alert(response);
+        $("#resultTable").html(response);
+      }
+  });
+});
+
+
+</script>
+
+
+  </body>
+
+ </html>
