@@ -1,5 +1,5 @@
 from collections import deque, namedtuple
-
+from math import sin, cos, sqrt, atan2, radians
 
 # we'll use infinity as a default distance to nodes.
 inf = float('inf')
@@ -97,7 +97,21 @@ nodes = data["Points"]
 graphList = []
 for name, adjNodes in data["Edges"].items():
     for adjNode in adjNodes:
-        graphList.append((name, adjNode, 2))
+        R = 6373.0
+        lat1 = radians(nodes[name][1])
+        lon1 = radians(nodes[name][0])
+        lat2 = radians(nodes[adjNode][1])
+        lon2 = radians(nodes[adjNode][0])
+
+        dlon = lon2 - lon1
+        dlat = lat2 - lat1
+
+        a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+        c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+        distance = R * c * 1000
+        print(name, adjNode, distance)
+        graphList.append((name, adjNode, distance))
 
 graph = Graph(graphList)
 
