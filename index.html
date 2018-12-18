@@ -69,14 +69,18 @@
     zocaloMarker.addTo(mymap);
     zocaloMarker.bindPopup("<h3 class='text-center'>Zocolo</h3><hr> <a href='https://en.wikipedia.org/wiki/Z%C3%B3calo' target='blank'> <img src='img/b.png' width='200px' /> </a>");
 
-    var geojsonLayer = new L.GeoJSON.AJAX("data\/attractions\/attractions.geojson", {pointToLayer: function(feature, latlng){
+    // var geojsonLayer = new L.GeoJSON.AJAX("data\/attractions\/attractions.geojson", {pointToLayer: function(feature, latlng){
+    var geojsonLayer = new L.GeoJSON.AJAX("myfile.geojson", {pointToLayer: function(feature, latlng){
       var str = "<h4>"+feature.properties.name + "</h4><hr/>";
       str += "<a href='" + feature.properties.web + "' target='blank'>Learn More</a>";
 
       var buttonStr = "<button id='zoomTo"+feature.properties.name.replace(/ /g, '');
       buttonStr += "' class='form-control btn btn-primary attraction'>";
       buttonStr += feature.properties.name+"</button>";
-      $("#side_panel").append(buttonStr);
+      if(feature.properties.name.length != 2){
+        $("#side_panel").append(buttonStr);
+      }
+
 
       $("#zoomTo"+feature.properties.name.replace(/ /g, '')).click(function(){
         mymap.setView([latlng.lat, latlng.lng],18);
