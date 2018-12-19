@@ -89,8 +89,8 @@
     var edgeLayer = new L.GeoJSON.AJAX("static/data/edges.geojson");
     edgeLayer.addTo(mymap);
     const options = {delay: 400, dashArray: [10,20], weight: 10, color: "#0000FF", pulseColor: "#FFFFFF"};
-    const path = new L.Polyline.AntPath([[45.50500, -73.57791],   [45.50249, -73.57643]], options);
-    // path.addTo(mymap);
+    const path = new L.Polyline.AntPath({{coordinates}}, options);
+    path.addTo(mymap);
     var bufferLayer;
     $("#btnBuffer").click(function(){
       if ($("#btnBuffer").html() == 'Buffer'){

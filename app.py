@@ -7,7 +7,7 @@ def index():
 
 @app.route('/mcgilltour')
 def mcgilltour():
-    return render_template('mcgilltour.html')
+    return render_template('mcgilltour.html', coordinates= [[45.507418, -73.579006], [ 45.50523, -73.57764]])
 
 if __name__ == '__main__':
    app.run(debug = True)
