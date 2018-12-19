@@ -1,6 +1,6 @@
 ## McGill Tour
 
-This is a personal project I worked on using maps. The website can find the shortest path between two building on McGill University Campus. I am using Dijkstra Algorithm to find the shortest Path. Building (points) and paths (edges) are all defined in geojson format.
+This is a personal project that I worked on using leaflet maps. The website can find the shortest path between two building on McGill University Campus. I am using Dijkstra Algorithm to find the shortest Path. Building (points) and paths (edges) are all defined in geojson format.
  ![](image/interface.JPG)
 
 ## Technologies used to develop
