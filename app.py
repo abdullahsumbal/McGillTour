@@ -39,28 +39,32 @@ def mcgilltour():
 
     # put in local data structure to apply graph algo
     graph = Graph(graphList)
+
+    # get start and end point defined by user
     start = request.args.get('start')
     end = request.args.get('end')
-    # find shortest path
-    # default
-    pointNames, totalDistance = graph.dijkstra("Trottier", "Trottier")
-    startCoord = [data["Points"]["Trottier"][1], data["Points"]["Trottier"][0]]
-    endCoord = startCoord
-    #user defined
-    if(start != None and end != None):
-        pointNames, totalDistance = graph.dijkstra(start, end)
-    else:
-        start = "Trottier"
-        end = "Trottier"
+    print(start, end)
 
+    #default case
+    if(start == None and end == None):
+        start = "Trottier"
+        end = start
+
+
+    # find shortest path
+    pointNames, totalDistance = graph.dijkstra(start, end)
+    startCoord = [data["Points"][start][1], data["Points"][start][0]]
+    endCoord = [data["Points"][end][1], data["Points"][end][0]]
+
+    # get all points in path
     connectingCoord = []
     for pointName in pointNames:
         coordinate = data["Points"][pointName]
         connectingCoord.append([coordinate[1],coordinate[0]])
 
-    if(len(connectingCoord) > 0):
-        startCoord = connectingCoord[0]
-        endCoord = connectingCoord[-1]
+    # if(len(connectingCoord) > 0):
+    #     startCoord = connectingCoord[0]
+    #     endCoord = connectingCoord[-1]
 
     locations = ["Trottier", "McConnell", "Arts", "Mclennan_Library", "Bronfman", "SSMU"]
     return render_template('mcgilltour.html', coordinates=connectingCoord, distance=int(totalDistance), locations=locations, start=start, end=end,
