@@ -5,7 +5,7 @@ import json
 features = []
 
 
-with open('edges.json') as f:
+with open('points_and_edges.json') as f:
     data = json.load(f)
 
 for name, coordinates in data["Points"].items():
@@ -19,7 +19,7 @@ for name, coordinates in data["Points"].items():
 
 feature_collection = FeatureCollection(features)
 
-with open('myfile.geojson', 'w') as f:
+with open('buildings.geojson', 'w') as f:
    dump(feature_collection, f)
 
 
@@ -30,5 +30,5 @@ for name, adjList in data["Edges"].items():
 
 feature_collection = FeatureCollection(features)
 
-with open('myfileedges.geojson', 'w') as f:
+with open('edges.geojson', 'w') as f:
    dump(feature_collection, f)

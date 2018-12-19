@@ -1,14 +1,16 @@
-from flask import Flask , redirect, render_template, url_for
+from flask import Flask , redirect, render_template, url_for, request
 from dijkistra import Graph
 import json
 from math import sin, cos, sqrt, atan2, radians
 app = Flask(__name__)
+graph = None
+data = None
 
 @app.route('/')
 def index():
     return redirect(url_for('mcgilltour'))
 
-@app.route('/mcgilltour')
+@app.route('/mcgilltour', methods=['GET'])
 def mcgilltour():
 
     # get all the point and coordinates
@@ -37,13 +39,21 @@ def mcgilltour():
 
     # put in local data structure to apply graph algo
     graph = Graph(graphList)
+    start = request.args.get('start')
+    end = request.args.get('end')
     # find shortest path
+    # default
     pointNames, totalDistance = graph.dijkstra("Trottier", "McConnell")
+    #user defined
+    if(start != None and end != None):
+        pointNames, totalDistance = graph.dijkstra(start, end)
+
     connectingCoord = []
     for pointName in pointNames:
         coordinate = data["Points"][pointName]
         connectingCoord.append([coordinate[1],coordinate[0]])
     return render_template('mcgilltour.html', coordinates=connectingCoord, distance=totalDistance)
+
 
 if __name__ == '__main__':
    app.run(debug = True)
