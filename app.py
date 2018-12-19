@@ -1,4 +1,7 @@
 from flask import Flask , redirect, render_template, url_for
+from dijkistra import Graph
+import json
+from math import sin, cos, sqrt, atan2, radians
 app = Flask(__name__)
 
 @app.route('/')
@@ -7,6 +10,37 @@ def index():
 
 @app.route('/mcgilltour')
 def mcgilltour():
+
+    # get all the point and coordinates
+    with open('static/data/points_and_edges.json') as f:
+        data = json.load(f)
+    nodes = data["Points"]
+
+    # calcualte the distance and put everything in following formate [("node1", "node2", distance)]
+    graphList = []
+    for name, adjNodes in data["Edges"].items():
+        for adjNode in adjNodes:
+            R = 6373.0
+            lat1 = radians(nodes[name][1])
+            lon1 = radians(nodes[name][0])
+            lat2 = radians(nodes[adjNode][1])
+            lon2 = radians(nodes[adjNode][0])
+
+            dlon = lon2 - lon1
+            dlat = lat2 - lat1
+
+            a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+            c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+            distance = R * c * 1000
+            print(name, adjNode, distance)
+            graphList.append((name, adjNode, distance))
+
+    graph = Graph(graphList)
+
+    x,y = graph.dijkstra("Trottier", "McConnell")
+    print(list(x), y)
+
     return render_template('mcgilltour.html', coordinates= [[45.507418, -73.579006], [ 45.50523, -73.57764]])
 
 if __name__ == '__main__':
