@@ -81,12 +81,13 @@ class Graph:
                     previous_vertices[neighbour] = current_vertex
 
         path, current_vertex = deque(), dest
+        dist = distances[current_vertex]
         while previous_vertices[current_vertex] is not None:
             path.appendleft(current_vertex)
             current_vertex = previous_vertices[current_vertex]
         if path:
             path.appendleft(current_vertex)
-        return path
+        return path, dist
 
 import json
 with open('edges.json') as f:
@@ -115,4 +116,5 @@ for name, adjNodes in data["Edges"].items():
 
 graph = Graph(graphList)
 
-print(list(graph.dijkstra("Arts Building", "Mclennan Library")))
+x,y = graph.dijkstra("Trottier", "McConnell")
+print(list(x), y)

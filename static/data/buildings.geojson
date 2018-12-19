@@ -8,7 +8,6 @@
 { "type": "Feature", "properties": { "id": 3, "name": "Arts Building", "image": "", "web": "https://www.mcgill.ca/giving/arts-building" }, "geometry": { "type": "Point", "coordinates": [ -73.57764, 45.50523   ] } },
 { "type": "Feature", "properties": { "id": 4, "name": "Mclennan Library", "image": "", "web": "https://www.mcgill.ca/library/branches/hssl" }, "geometry": { "type": "Point", "coordinates": [  -73.57589, 45.50326 ] } },
 { "type": "Feature", "properties": { "id": 5, "name": "Bronfman", "image": "", "web": "" }, "geometry": { "type": "Point", "coordinates": [ -73.57643, 45.50249 ] } },
-{ "type": "Feature", "properties": { "id": 6, "name": "Mclntyre", "image": "", "web": "" }, "geometry": { "type": "Point", "coordinates": [-73.58252, 45.50304 ] } },
 { "type": "Feature", "properties": { "id": 7, "name": "SSMU", "image": "", "web": "" }, "geometry": { "type": "Point", "coordinates": [ -73.57817, 45.50353] } }
 ]
 }
