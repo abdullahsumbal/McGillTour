@@ -59,11 +59,9 @@ def mcgilltour():
         coordinate = data["Points"][pointName]
         connectingCoord.append([coordinate[1],coordinate[0]])
 
-
     locations = ["Trottier", "McConnell", "Arts", "Mclennan_Library", "Bronfman", "SSMU"]
     return render_template('mcgilltour.html', coordinates=connectingCoord, distance=int(totalDistance), locations=locations, start=start, end=end,
     startCoord=startCoord, endCoord=endCoord)
-
 
 if __name__ == '__main__':
    app.run(debug = True)
