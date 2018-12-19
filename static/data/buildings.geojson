@@ -3,11 +3,11 @@
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 
 "features": [
-{ "type": "Feature", "properties": { "id": 1, "name": "Trottier", "image": "", "web": "https://www.mcgill.ca/engineering/faculty-staff/facilities/buildings/lm-trottier" }, "geometry": { "type": "Point", "coordinates": [ -73.579006, 45.507418 ] } },
-{ "type": "Feature", "properties": { "id": 2, "name": "McConnell", "image": "", "web": "https://www.mcgill.ca/engineering/faculty-staff/facilities/buildings/mcconnell" }, "geometry": { "type": "Point", "coordinates": [ -73.57643, 45.50614] } },
+{ "type": "Feature", "properties": { "id": 1, "name": "Trottier Building", "image": "", "web": "https://www.mcgill.ca/engineering/faculty-staff/facilities/buildings/lm-trottier" }, "geometry": { "type": "Point", "coordinates": [ -73.579006, 45.507418 ] } },
+{ "type": "Feature", "properties": { "id": 2, "name": "McConnell Building", "image": "", "web": "https://www.mcgill.ca/engineering/faculty-staff/facilities/buildings/mcconnell" }, "geometry": { "type": "Point", "coordinates": [ -73.57643, 45.50614] } },
 { "type": "Feature", "properties": { "id": 3, "name": "Arts Building", "image": "", "web": "https://www.mcgill.ca/giving/arts-building" }, "geometry": { "type": "Point", "coordinates": [ -73.57764, 45.50523   ] } },
 { "type": "Feature", "properties": { "id": 4, "name": "Mclennan Library", "image": "", "web": "https://www.mcgill.ca/library/branches/hssl" }, "geometry": { "type": "Point", "coordinates": [  -73.57589, 45.50326 ] } },
-{ "type": "Feature", "properties": { "id": 5, "name": "Bronfman", "image": "", "web": "" }, "geometry": { "type": "Point", "coordinates": [ -73.57643, 45.50249 ] } },
-{ "type": "Feature", "properties": { "id": 7, "name": "SSMU", "image": "", "web": "" }, "geometry": { "type": "Point", "coordinates": [ -73.57817, 45.50353] } }
+{ "type": "Feature", "properties": { "id": 5, "name": "Bronfman Building", "image": "", "web": "" }, "geometry": { "type": "Point", "coordinates": [ -73.57643, 45.50249 ] } },
+{ "type": "Feature", "properties": { "id": 7, "name": "SSMU Building", "image": "", "web": "" }, "geometry": { "type": "Point", "coordinates": [ -73.57817, 45.50353] } }
 ]
 }

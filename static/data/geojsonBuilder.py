@@ -19,7 +19,7 @@ for name, coordinates in data["Points"].items():
 
 feature_collection = FeatureCollection(features)
 
-with open('buildings.geojson', 'w') as f:
+with open('points.geojson', 'w') as f:
    dump(feature_collection, f)
 
 

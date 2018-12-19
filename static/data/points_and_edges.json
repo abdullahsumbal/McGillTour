@@ -3,8 +3,8 @@
   "Points" : {
     "Trottier": [-73.579006, 45.507418],
     "McConnell": [-73.57643, 45.50614],
-    "Arts Building": [-73.57764, 45.50523],
-    "Mclennan Library": [ -73.57589, 45.50326],
+    "Arts": [-73.57764, 45.50523],
+    "Mclennan_Library": [ -73.57589, 45.50326],
     "Bronfman": [-73.57643, 45.50249],
     "SSMU": [-73.57817, 45.50353],
 
@@ -44,9 +44,9 @@
   "Edges" : {
     "Trottier": ["p1", "p4"],
     "McConnell": ["p3"],
-    "Arts Building": ["p9"],
+    "Arts": ["p9"],
     "Bronfman": ["p15"],
-    "Mclennan Library": ["p17"],
+    "Mclennan_Library": ["p17"],
     "SSMU":["p20"],
     "p1": ["Trottier","p2"],
     "p2": ["p1", "p3", "p6"],
@@ -56,7 +56,7 @@
     "p6": ["p5", "p3"],
     "p7": ["p5", "p8"],
     "p8": ["p7", "p9"],
-    "p9": ["p8", "Arts Building", "p10"],
+    "p9": ["p8", "Arts", "p10"],
     "p10": ["p9", "p11"],
     "p11":["p10","p13", "p16"],
     "p12": ["p9", "p13", "p14"],
@@ -64,7 +64,7 @@
     "p14": ["p12", "p19"],
     "p15": ["p19", "Bronfman"],
     "p16": ["p11", "p17"],
-    "p17": ["p16", "Mclennan Library", "p18"],
+    "p17": ["p16", "Mclennan_Library", "p18"],
     "p18": ["p17", "p19", "p20"],
     "p19": ["p14", "p15", "p18"],
     "p20": ["p18", "SSMU"]
