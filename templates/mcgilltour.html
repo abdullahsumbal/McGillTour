@@ -8,10 +8,8 @@
   <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
-  <script src="resources\leftlet.ajax.js"></script>
-  <script src="resources\leaflet-ant-path.es6.js"></script>
-  <!-- integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous" -->
+  <script src="static\resources\leftlet.ajax.js"></script>
+  <script src="static\resources\leaflet-ant-path.es6.js"></script>
 <style>
   #header {
     height: 75px;
@@ -59,18 +57,17 @@
 
 
   <script>
+    // load map
     var mymap = L.map('mapdiv');
-    mymap.setView([45.50500, -73.57791] , 17);
+    // set initial corrinates and zoom
+    mymap.setView([45.50500, -73.57791] , 16);
 
+    // set background - can be changed
     var backgroundLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
     mymap.addLayer(backgroundLayer);
 
-    var zocaloMarker = L.marker([19.43278, -99.13333]);
-    zocaloMarker.addTo(mymap);
-    zocaloMarker.bindPopup("<h3 class='text-center'>Zocolo</h3><hr> <a href='https://en.wikipedia.org/wiki/Z%C3%B3calo' target='blank'> <img src='img/b.png' width='200px' /> </a>");
-
     // var geojsonLayer = new L.GeoJSON.AJAX("data\/attractions\/attractions.geojson", {pointToLayer: function(feature, latlng){
-    var geojsonLayer = new L.GeoJSON.AJAX("myfile.geojson", {pointToLayer: function(feature, latlng){
+    var geojsonLayer = new L.GeoJSON.AJAX("static/data/buildings.geojson", {pointToLayer: function(feature, latlng){
       var str = "<h4>"+feature.properties.name + "</h4><hr/>";
       str += "<a href='" + feature.properties.web + "' target='blank'>Learn More</a>";
 
@@ -89,7 +86,7 @@
     }});
     geojsonLayer.addTo(mymap);
 
-    var edgeLayer = new L.GeoJSON.AJAX("myfileedges.geojson");
+    var edgeLayer = new L.GeoJSON.AJAX("static/data/edges.geojson");
     edgeLayer.addTo(mymap);
     const options = {delay: 400, dashArray: [10,20], weight: 10, color: "#0000FF", pulseColor: "#FFFFFF"};
     const path = new L.Polyline.AntPath([[45.50500, -73.57791],   [45.50249, -73.57643]], options);
