@@ -33,15 +33,17 @@ def mcgilltour():
             c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
             distance = R * c * 1000
-            print(name, adjNode, distance)
             graphList.append((name, adjNode, distance))
 
+    # put in local data structure to apply graph algo
     graph = Graph(graphList)
-
-    x,y = graph.dijkstra("Trottier", "McConnell")
-    print(list(x), y)
-
-    return render_template('mcgilltour.html', coordinates= [[45.507418, -73.579006], [ 45.50523, -73.57764]])
+    # find shortest path
+    pointNames, totalDistance = graph.dijkstra("Trottier", "McConnell")
+    connectingCoord = []
+    for pointName in pointNames:
+        coordinate = data["Points"][pointName]
+        connectingCoord.append([coordinate[1],coordinate[0]])
+    return render_template('mcgilltour.html', coordinates=connectingCoord, distance=totalDistance)
 
 if __name__ == '__main__':
    app.run(debug = True)
