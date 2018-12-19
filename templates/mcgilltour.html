@@ -65,7 +65,7 @@
     <h3 class="text-center">Distance: {{distance}} meters</h3>
 
     <h1 class="text-center">Buildings</h1>
-    <button id="btnBuffer" class="form-control btn-warning attraction">High Light</button>
+    <button id="btnBuffer" class="form-control btn-warning attraction">Show Paths</button>
   </div>
   <div id="mapdiv" class="col-md-9 col-sm-9"></div>
   </div>
@@ -108,7 +108,7 @@
     geojsonLayer.addTo(mymap);
 
     var edgeLayer = new L.GeoJSON.AJAX("static/data/edges.geojson");
-    edgeLayer.addTo(mymap);
+    //edgeLayer.addTo(mymap);
     const options = {delay: 400, dashArray: [10,20], weight: 10, color: "#0000FF", pulseColor: "#FFFFFF"};
     const path = new L.Polyline.AntPath({{coordinates}}, options);
     path.addTo(mymap);
@@ -116,13 +116,15 @@
 
     // buffer function
     $("#btnBuffer").click(function(){
-      if ($("#btnBuffer").html() == 'Buffer'){
+      if ($("#btnBuffer").html() == 'Show Paths'){
         var bufferedAttractions = turf.buffer(geojsonLayer.toGeoJSON(), 20, {units: 'meters'});
         bufferLayer = L.geoJSON(bufferedAttractions).addTo(mymap);
-        $("#btnBuffer").html("Romve Buffer");
+        edgeLayer.addTo(mymap);
+        $("#btnBuffer").html("Hide Paths");
       }else{
         mymap.removeLayer(bufferLayer);
-        $("#btnBuffer").html("Buffer");
+        mymap.removeLayer(edgeLayer)
+        $("#btnBuffer").html("Show Paths");
       }
     });
 
