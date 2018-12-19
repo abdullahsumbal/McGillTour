@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>Webmap101</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -37,13 +38,34 @@
   <div class="container-fluid">
     <div class="row">
       <div id="header" class="col-md-12">
-        <h1 class="text-center">Mexico City</h1>
+        <h1 class="text-center">McGill Campus</h1>
       </div>
   </div>
   <div class="row">
   <div id="side_panel" class="col-md-3 col-sm-3">
-    <h1 class="text-center">attraction</h1>
-    <button id="btnBuffer" class="form-control btn-warning attraction">Buffer</button>
+
+    <h1 class="text-center">Find Shortest Path</h1>
+    <div class="column">
+      <label>Starting Position</label>
+      <select id="selectStart" class="mdb-select md-form colorful-select dropdown-primary">
+        {% for location in locations %}
+          <option value={{location}} {% if start==location %} selected="selected" {% endif %}>{{location}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="column">
+      <label>Ending Position</label>
+      <select id="selectEnd"class="mdb-select md-form colorful-select dropdown-primary" value={{end}}>
+        {% for location in locations %}
+        <option value={{location}} {% if end==location %} selected="selected" {% endif %}>{{location}}</option>
+        {% endfor %}
+      </select>
+      <button id="selectButton" class="form-control btn-success">Find Path</button>
+    </div>
+    <h3 class="text-center">Distance: {{distance}} meters</h3>
+
+    <h1 class="text-center">Buildings</h1>
+    <button id="btnBuffer" class="form-control btn-warning attraction">High Light</button>
   </div>
   <div id="mapdiv" class="col-md-9 col-sm-9"></div>
   </div>
@@ -51,7 +73,6 @@
   <div id="footer" class="col-xl-12">
     <h4 id="map_coords" class="text-center">Latitude : 19.4 Longitude: -99.1 Zoom Level: 11</h4>
     </div>
-
   </div>
 </div>
 
@@ -66,7 +87,7 @@
     var backgroundLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
     mymap.addLayer(backgroundLayer);
 
-    // var geojsonLayer = new L.GeoJSON.AJAX("data\/attractions\/attractions.geojson", {pointToLayer: function(feature, latlng){
+    // add button for all buildings
     var geojsonLayer = new L.GeoJSON.AJAX("static/data/buildings.geojson", {pointToLayer: function(feature, latlng){
       var str = "<h4>"+feature.properties.name + "</h4><hr/>";
       str += "<a href='" + feature.properties.web + "' target='blank'>Learn More</a>";
@@ -78,7 +99,7 @@
         $("#side_panel").append(buttonStr);
       }
 
-
+      // button action
       $("#zoomTo"+feature.properties.name.replace(/ /g, '')).click(function(){
         mymap.setView([latlng.lat, latlng.lng],18);
       });
@@ -92,6 +113,8 @@
     const path = new L.Polyline.AntPath({{coordinates}}, options);
     path.addTo(mymap);
     var bufferLayer;
+
+    // buffer function
     $("#btnBuffer").click(function(){
       if ($("#btnBuffer").html() == 'Buffer'){
         var bufferedAttractions = turf.buffer(geojsonLayer.toGeoJSON(), 20, {units: 'meters'});
@@ -103,10 +126,19 @@
       }
     });
 
+    // find path function
+    $("#selectButton").click(function(){
+      var start = $("#selectStart").val();
+      var end = $("#selectEnd").val();
+      location.replace("mcgilltour?start="+start+"&end="+end);
+      // $.get("mcgilltour.html", { start: start, end: end});
+    });
+
     mymap.on('mousemove', function(e){
-      var str = "Latitude: " + e.latlng.lat.toFixed(5) + " Longitude:" + e.latlng.lng.toFixed(5) + " Zoom Level: " + mymap.getZoom() + e.latlng.lng.toFixed(5) +", "+ e.latlng.lat.toFixed(5);
+      var str = "Latitude: " + e.latlng.lat.toFixed(5) + " Longitude:" + e.latlng.lng.toFixed(5) + " Zoom Level: " + mymap.getZoom();
       $("#map_coords").html(str);
     });
   </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
