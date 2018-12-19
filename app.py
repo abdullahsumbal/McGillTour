@@ -43,13 +43,10 @@ def mcgilltour():
     # get start and end point defined by user
     start = request.args.get('start')
     end = request.args.get('end')
-    print(start, end)
-
     #default case
     if(start == None and end == None):
         start = "Trottier"
         end = start
-
 
     # find shortest path
     pointNames, totalDistance = graph.dijkstra(start, end)
@@ -62,9 +59,6 @@ def mcgilltour():
         coordinate = data["Points"][pointName]
         connectingCoord.append([coordinate[1],coordinate[0]])
 
-    # if(len(connectingCoord) > 0):
-    #     startCoord = connectingCoord[0]
-    #     endCoord = connectingCoord[-1]
 
     locations = ["Trottier", "McConnell", "Arts", "Mclennan_Library", "Bronfman", "SSMU"]
     return render_template('mcgilltour.html', coordinates=connectingCoord, distance=int(totalDistance), locations=locations, start=start, end=end,
