@@ -17,11 +17,11 @@
     background-color: :darkgoldenrod;
   }
   #mapdiv {
-    height: 850px;
+    height: 650px;
     background-color: salmon;
   }
   #side_panel{
-    height:850px;
+    height:650px;
     background-color: beige;
   }
   #footer{
@@ -29,7 +29,7 @@
     background-color: darkgrey;
 }
 .attraction{
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 </style>
 
@@ -88,7 +88,9 @@
     mymap.addLayer(backgroundLayer);
 
     // add button for all buildings
+    //var dict = {};
     var geojsonLayer = new L.GeoJSON.AJAX("static/data/buildings.geojson", {pointToLayer: function(feature, latlng){
+      //dict[feature.properties.value] = [latlng.lat, latlng.lng];
       var str = "<h4>"+feature.properties.name + "</h4><hr/>";
       str += "<a href='" + feature.properties.web + "' target='blank'>Learn More</a>";
 
@@ -105,13 +107,16 @@
         var marker = L.marker(latlng).addTo(mymap);
         marker.bindPopup(str).openPopup();
       });
+
       return L.marker(latlng).bindPopup(str);
     }});
     geojsonLayer.addTo(mymap);
 
-    /// popup when selected
-
-    ///
+    var markerStart = L.marker(['{{startCoord[0]}}', '{{startCoord[1]}}']).addTo(mymap);
+    markerStart.bindPopup('{{start}}').openPopup();
+    var markerEnd = L.marker(['{{endCoord[0]}}', '{{endCoord[1]}}']).addTo(mymap);
+    markerEnd.bindPopup('{{end}}').openPopup();
+    mymap.setView(['{{endCoord[0]}}', '{{endCoord[1]}}'],16);
 
     var edgeLayer = new L.GeoJSON.AJAX("static/data/edges.geojson");
     //edgeLayer.addTo(mymap);
