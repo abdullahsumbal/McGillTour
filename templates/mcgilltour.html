@@ -38,7 +38,7 @@
   <div class="container-fluid">
     <div class="row">
       <div id="header" class="col-md-12">
-        <h1 class="text-center">McGill Campus</h1>
+        <h1 class="text-center">McGill University DownTown Campus</h1>
       </div>
   </div>
   <div class="row">
@@ -102,10 +102,16 @@
       // button action
       $("#zoomTo"+feature.properties.name.replace(/ /g, '')).click(function(){
         mymap.setView([latlng.lat, latlng.lng],18);
+        var marker = L.marker(latlng).addTo(mymap);
+        marker.bindPopup(str).openPopup();
       });
       return L.marker(latlng).bindPopup(str);
     }});
     geojsonLayer.addTo(mymap);
+
+    /// popup when selected
+
+    ///
 
     var edgeLayer = new L.GeoJSON.AJAX("static/data/edges.geojson");
     //edgeLayer.addTo(mymap);
@@ -114,7 +120,7 @@
     path.addTo(mymap);
     var bufferLayer;
 
-    // buffer function
+    // show path function
     $("#btnBuffer").click(function(){
       if ($("#btnBuffer").html() == 'Show Paths'){
         var bufferedAttractions = turf.buffer(geojsonLayer.toGeoJSON(), 20, {units: 'meters'});
