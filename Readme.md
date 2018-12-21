@@ -14,6 +14,7 @@ This is a personal project that I worked on using leaflet maps. The website can 
 6. Digital Ocean (Hosting platform)
 
 My Digital Ocean referral link : https://m.do.co/c/434ffda613fb
+
 Note: Everyone I refer gets $100 in credit over 60 days. Once you have spent $25 with Digital Ocean, I'll get $25. Help this poor student out :D
 
 ## Programming Language
